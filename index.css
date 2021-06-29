@@ -1,0 +1,41 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  align-items: space-between;
+  justify-content: center;
+  background: #EFEFBB;
+}
+
+.card {
+    margin: 5vh;
+    height: 35vh;
+    width: 12vw;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5%;
+}
+
+.image-container {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  margin: auto;
+}
+
+.card-image {
+  margin-top: 15px;
+  max-width: 90%;
+}
+
+.id-number {
+  color: black;
+  margin-top: 5vh;
+}
+
+.name {
+  color: black;
+}
