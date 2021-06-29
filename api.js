@@ -74,16 +74,21 @@ function displayPokemonInfo(id) {
     fetch(baseURL2 + id)
     .then(response => response.json())
     .then(pokemon => {
-        let wrapper = document.querySelector(".wrapper");
-        let infoThing = document.createElement("div");
-        let flavorText = document.createElement("p");
         
-        textEntries = pokemon.flavor_text_entries;
+        let textEntries = pokemon.flavor_text_entries;
+        let text;
         for(entry of textEntries){
             if(entry.language.name === "en"){
-                flavorText.innerText = entry.flavor_text;
+                text = entry.flavor_text;
+                break;
             }
         }
+        let utter = new SpeechSynthesisUtterance();
+        utter.lang = 'en-US';
+        utter.text = text;
+        utter.pitch = 0.65;
+        utter.rate = 1.08;
+        window.speechSynthesis.speak(utter);
     });
 }
 display();
