@@ -74,7 +74,6 @@ function displayPokemonInfo(id) {
     fetch(baseURL2 + id)
     .then(response => response.json())
     .then(pokemon => {
-        
         let textEntries = pokemon.flavor_text_entries;
         let text;
         for(entry of textEntries){
@@ -97,4 +96,5 @@ function displayPokemonInfo(id) {
         window.speechSynthesis.speak(utter2);
     });
 }
+
 display();
