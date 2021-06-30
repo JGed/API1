@@ -83,12 +83,18 @@ function displayPokemonInfo(id) {
                 break;
             }
         }
-        let utter = new SpeechSynthesisUtterance();
-        utter.lang = 'en-US';
-        utter.text = text;
-        utter.pitch = 0.65;
-        utter.rate = 1.08;
-        window.speechSynthesis.speak(utter);
+        let utter1 = new SpeechSynthesisUtterance();
+        utter1.lang = "en-US";
+        utter1.pitch = 0.65;
+        utter1.rate = 1.08;
+        utter1.text = pokemon.name;
+        let utter2 = new SpeechSynthesisUtterance();
+        utter2.lang = "en-US";
+        utter2.text = text;
+        utter2.pitch = 0.65;
+        utter2.rate = 1.08;
+        window.speechSynthesis.speak(utter1);
+        window.speechSynthesis.speak(utter2);
     });
 }
 display();
