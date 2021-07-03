@@ -26,6 +26,7 @@ function displayPokemonCard(pokemon) {
     let card = document.createElement("div");
     let name = document.createElement("h1");
     let idNumber = document.createElement("h3");
+    let idDiv = document.createElement("div");
     let imageContainer = document.createElement("div");
     let cardImage = document.createElement("img");
     let typeDiv = document.createElement("div");
@@ -40,7 +41,7 @@ function displayPokemonCard(pokemon) {
     cardImage.classList.add("card-image");
     typeDiv.classList.add("type");
     typeName.classList.add("type-name");
-
+    idDiv.classList.add("type")
 
     //filling in the pokemon information into the html elements
     name.innerText = pokemon.species.name.charAt(0).toUpperCase() + pokemon.species.name.slice(1);
@@ -55,10 +56,10 @@ function displayPokemonCard(pokemon) {
     imageContainer.appendChild(cardImage);
 
     typeDiv.appendChild(typeName); /// new line
-
+    idDiv.appendChild(idNumber);
     card.appendChild(name);
     card.appendChild(imageContainer);
-    card.appendChild(idNumber);
+    card.appendChild(idDiv);
     card.appendChild(typeDiv); // ****** typeName
     
     displayArea.appendChild(card);

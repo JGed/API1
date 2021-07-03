@@ -30,6 +30,7 @@ body {
   height: 120px;
   text-align: center;
   background-color: rbga(255, 255, 255, 0.6);
+  margin: 0;
 }
 .card-image {
   max-width: 95%;
@@ -37,7 +38,6 @@ body {
 
 .id-number {
   color: black;
-  margin-top: 3vh;
 }
 
 .name {
@@ -53,6 +53,7 @@ body {
 }
 
 p {
-  margin: 20px;
   text-align: center;
+  padding-top: 20px;
+  margin: 0px 20px 0px 20px;
 }
