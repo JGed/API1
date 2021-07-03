@@ -1,21 +1,20 @@
 .wrapper {
   display: flex;
-  width: 100%;
   flex-wrap: wrap;
-  margin: 0 auto;
   align-items: space-between;
   justify-content: center;
   background: #EFEFBB;
-  margin: 0;
+  border-style: none;
 }
-
+body {
+    margin: 0;
+}
 .card {
     margin: 5vh;
-    height: 35vh;
+    height: 32vh;
     width: 12vw;
     text-align: center;
     border: 1px solid black;
-    border-radius: 5%;
     cursor: pointer;
 }
 
@@ -27,17 +26,33 @@
   text-align: center;
   margin: auto;
 }
-
+.flavor-text-container {
+  height: 120px;
+  text-align: center;
+  background-color: rbga(255, 255, 255, 0.6);
+}
 .card-image {
-  margin-top: 15px;
-  max-width: 90%;
+  max-width: 95%;
 }
 
 .id-number {
   color: black;
-  margin-top: 5vh;
+  margin-top: 3vh;
 }
 
 .name {
   color: black;
+}
+
+.type {
+  width: 3vw;
+  margin: auto;
+}
+.type-name {
+  color: black;
+}
+
+p {
+  margin: 20px;
+  text-align: center;
 }

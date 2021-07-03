@@ -28,6 +28,7 @@ function displayPokemonCard(pokemon) {
     let idNumber = document.createElement("h3");
     let imageContainer = document.createElement("div");
     let cardImage = document.createElement("img");
+    let typeDiv = document.createElement("div");
     let typeName = document.createElement("h3");
 
 
@@ -37,7 +38,8 @@ function displayPokemonCard(pokemon) {
     idNumber.classList.add("id-number");
     imageContainer.classList.add("image-container");
     cardImage.classList.add("card-image");
-    typeName.classList.add("name");
+    typeDiv.classList.add("type");
+    typeName.classList.add("type-name");
 
 
     //filling in the pokemon information into the html elements
@@ -46,19 +48,18 @@ function displayPokemonCard(pokemon) {
     cardImage.src = pokemon.sprites.other["official-artwork"].front_default;
     typeName.innerText = pokemon.types[0].type.name;
     card.style.background = Colors[typeName.innerText];
-
     // adding event listender so that more pokemon information will be displayed when the card is clicked
-    card.addEventListener("click", event => {
-        displayPokemonInfo(pokemon.id);
-    });
+    card.addEventListener("click", displayPokemonInfo);
 
     //appending the elements to the card, and the card to the page
     imageContainer.appendChild(cardImage);
 
+    typeDiv.appendChild(typeName); /// new line
+
     card.appendChild(name);
     card.appendChild(imageContainer);
     card.appendChild(idNumber);
-    card.appendChild(typeName);
+    card.appendChild(typeDiv); // ****** typeName
     
     displayArea.appendChild(card);
 }
@@ -69,8 +70,35 @@ async function display() {
         displayPokemonCard(pokemon); 
     }
 }
+function displayPokemonImage() {
+    let imageContainer = document.createElement("div");
+    let id = this.firstChild.nextSibling.nextSibling.innerText.substring(1);
+    let regex = new RegExp("^0+(?!$)", "g");
+    id = id.replaceAll(regex, "");
+    imageContainer.classList.add("image-container");
+    let image = document.createElement("img");
+    image.classList.add("card-image");
+    imageContainer.appendChild(image);
+    fetch(baseURL1 + id)
+    .then(response => response.json())
+    .then(pokemon => {
+        image.src =   pokemon.sprites.other["official-artwork"].front_default;
+        this.removeChild(this.firstChild.nextSibling);
+        this.insertBefore(imageContainer, this.firstChild.nextSibling);
+    });
 
-function displayPokemonInfo(id) {
+    this.removeEventListener("click", displayPokemonImage);
+    this.addEventListener("click", displayPokemonInfo);
+}
+
+function displayPokemonInfo() {
+    let id = this.firstChild.nextSibling.nextSibling.innerText.substring(1);
+    let regex = new RegExp("^0+(?!$)", "g");
+    id = id.replaceAll(regex, "");
+    let textDiv = document.createElement("div");
+    textDiv.classList.add("flavor-text-container");
+    let paragraph = document.createElement("p");
+    textDiv.appendChild(paragraph);
     fetch(baseURL2 + id)
     .then(response => response.json())
     .then(pokemon => {
@@ -79,6 +107,7 @@ function displayPokemonInfo(id) {
         for(entry of textEntries){
             if(entry.language.name === "en"){
                 text = entry.flavor_text;
+                paragraph.innerText = text.replace(/(\r\n|\n|\r|\f)/gm, " ");
                 break;
             }
         }
@@ -94,7 +123,13 @@ function displayPokemonInfo(id) {
         utter2.rate = 1.08;
         window.speechSynthesis.speak(utter1);
         window.speechSynthesis.speak(utter2);
+
+        this.removeChild(this.firstChild.nextSibling);
+        this.insertBefore(textDiv, this.firstChild.nextSibling);
     });
+
+    this.removeEventListener("click", displayPokemonInfo);
+    this.addEventListener("click", displayPokemonImage);
 }
 
 display();
